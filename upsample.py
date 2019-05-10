@@ -15,6 +15,13 @@ print("y_train freqs:")
 print(np.unique(y_train, return_counts=True))
 print()
 
+print("Writing non-upsampled train files...")
+filename_base = TRAIN_FILE[:TRAIN_FILE.rindex(".")]
+np.save("{}{}Data".format(DATA_PATH, filename_base), x_train)
+np.save("{}{}Labels".format(DATA_PATH, filename_base), y_train)
+print()
+
+
 x_train_exo = x_train[y_train == 1]
 x_train = np.vstack((x_train, np.repeat(x_train_exo, UPSAMPLE_MULT - 1, axis=0)))
 print("upsampled x_train shape:", x_train.shape)
